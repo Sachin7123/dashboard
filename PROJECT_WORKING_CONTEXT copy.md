@@ -3,7 +3,6 @@
 This file is the persistent working memory for the ReMorph dashboard project.
 
 Use this file when:
-
 - chat context is lost
 - token limits are reached
 - a new LLM session needs to resume work
@@ -17,7 +16,6 @@ If the user says `update that document`, this file should be updated first so th
 The `dashboard` app is the frontend control plane for `ReMorph`.
 
 ReMorph is a self-healing API system. The dashboard is meant to show:
-
 - what API request failed
 - what kind of drift happened
 - how ReMorph reasoned about the failure
@@ -27,7 +25,6 @@ ReMorph is a self-healing API system. The dashboard is meant to show:
 
 This is not a generic admin panel.
 It is meant to feel like:
-
 - a premium AI operations control center
 - a product demo for clients/investors
 - an explainable observability surface for autonomous API healing
@@ -35,7 +32,6 @@ It is meant to feel like:
 ## 2. Product Direction
 
 The intended visual/product style is:
-
 - dark premium enterprise UI
 - glassmorphism panels
 - cinematic ambient lighting
@@ -44,7 +40,6 @@ The intended visual/product style is:
 - polished, readable, production-grade layout
 
 The dashboard should communicate:
-
 - intelligence
 - control
 - observability
@@ -54,12 +49,10 @@ The dashboard should communicate:
 ## 3. Workspace Structure
 
 Root workspace:
-
 - `d:\Dashboard\dashboard` = frontend dashboard
 - `d:\Dashboard\ReMorph` = backend/self-healing engine
 
 Relevant frontend areas:
-
 - `dashboard/src/App.tsx`
 - `dashboard/src/index.css`
 - `dashboard/src/components/dashboard/*`
@@ -70,24 +63,20 @@ Relevant frontend areas:
 - `dashboard/src/mock/database.ts`
 
 Relevant backend areas:
-
 - `ReMorph/server/main.py`
 - `ReMorph/app/services/telemetry.py`
 
 ## 4. Current Architecture
 
 Frontend data flow:
-
 1. `useDashboardRuntime()` loads telemetry snapshots.
 2. Telemetry comes from `src/services/telemetry/index.ts`.
 3. The service chooses mock, real, or auto mode.
 4. Mock mode is powered by a structured mock backend.
 5. Real mode reads from the backend telemetry endpoint.
-6. The UI renders metrics, event feed, diff view, reasoning trace, workflow replay, benchmark/training panels, and hero flow from the active event.
-7. Runtime polling now uses a softer commit path so rapid live-ingestion refreshes feel smoother and produce less visible flicker.
+6. The UI renders metrics, event feed, diff view, reasoning trace, and hero flow from the active event.
 
 Key runtime files:
-
 - `dashboard/src/hooks/useDashboardRuntime.ts`
 - `dashboard/src/services/telemetry/index.ts`
 - `dashboard/src/services/telemetry/mockBackend.ts`
@@ -98,32 +87,20 @@ Key runtime files:
 ## 5. Current UI Composition
 
 Main screen structure:
-
 - left sidebar
 - hero/system flow section
-- product pipeline strip
 - summary metrics
 - active event feed
-- benchmark advantage panel
-- training readiness panel
 - diff/recovery panel
 - cognitive trace panel
-- workflow replay panel
-- runtime services panel
 - operational metadata panel
 - training/operator summary panel
 
 Important components:
-
 - `HeroFlow.tsx`
 - `EventFeed.tsx`
 - `DiffViewer.tsx`
 - `TracePanel.tsx`
-- `PipelineMap.tsx`
-- `WorkflowTimeline.tsx`
-- `BenchmarkPanel.tsx`
-- `TrainingPanel.tsx`
-- `ServiceHealthPanel.tsx`
 - `MetricCard.tsx`
 - `StatusPill.tsx`
 - `SignalRow.tsx`
@@ -134,7 +111,6 @@ Important components:
 These were deliberate decisions during the current iteration:
 
 ### Layout
-
 - The dashboard should be responsive and dynamic with screen size.
 - It should not feel like a tiny centered box on larger monitors.
 - The outer layout should use most of the available display width.
@@ -142,36 +118,23 @@ These were deliberate decisions during the current iteration:
 - Main content should expand naturally on wider displays.
 
 ### Scroll Behavior
-
 - The page is allowed to scroll vertically.
 - Internal cards can still have controlled scroll regions where needed.
 - Full `100vh` locking for the entire interface was making the layout cramped and visually messy, so that approach was relaxed.
 
 ### Hero Section
-
 - The hero is important, but it should not overpower the whole dashboard.
 - The canvas/orb should feel fitted and controlled.
 - The hero must support the layout, not dominate it.
-- The hero should communicate left-to-right request flow without cluttering the composition.
-- Subtle connector rails or pulse markers are preferred over large moving text labels inside the hero.
-- Side request/output cards should feel premium and enterprise-like, not like loose floating callouts.
 
 ### Lower Content Area
-
 - The lower-right side was previously too compressed.
 - Diff/trace/metadata/training cards should not be forced into overly narrow columns.
 - The event feed needs enough room to read comfortably.
 
-### Text Handling
-
-- Long URLs, telemetry labels, notices, and diagnostic strings should wrap cleanly instead of clipping or overflowing.
-- Cards should be resilient to synthetic or future real backend payloads that contain long identifiers or verbose messages.
-- Prefer fixing overflow with layout and wrapping rules instead of hiding important data.
-
 ## 7. Problems Already Identified
 
 These issues were explicitly identified during the project:
-
 - hero canvas felt messy and oversized
 - dashboard was too locked to viewport height
 - lower sections were clustered and over-compressed
@@ -184,7 +147,6 @@ These issues were explicitly identified during the project:
 These upgrades have already been done:
 
 ### Mock / Backend Readiness
-
 - mock backend layer added
 - structured telemetry adapter added
 - mock and real backend switching supported
@@ -192,40 +154,27 @@ These upgrades have already been done:
 - session/auth-related mock states added
 
 ### UI Upgrade
-
 - dashboard rebuilt around modular components
 - premium dark glass design system established
 - animated hero/system flow added
 - event feed, diff viewer, trace panel, metadata cards modularized
-- dashboard now exposes Sprint 4-style workflow episodes, benchmark deltas, training readiness, and runtime service health
-- product vision flow is now explicitly shown as Input -> Detection -> Intelligence -> Self-Healing -> Recovery -> Success
-- hero flow now uses premium left/right side cards with subtler connector pulses instead of noisy moving request/healed text labels
-- wrapping and overflow handling were tightened across the dashboard so long URLs and diagnostics fit more reliably
 
 ### Responsive/Layout Upgrade
-
 - layout moved away from hard locked viewport-only behavior
 - page can scroll vertically when needed
 - left rail can remain sticky on large screens
 - dashboard width now uses more of the display
 - responsive sidebar sizing introduced
 - right-side content no longer forced into tiny columns
-- live-ingestion updates were smoothed so polling produces less visible jitter/flicker in the UI
 
 ## 9. Current State Of The Project
 
 At the latest saved state:
-
 - the dashboard is much closer to the desired product quality
 - the architecture is cleaner than the original monolithic version
 - the app is responsive and more display-aware than before
 - there is still ongoing UI polish/alignment work
 - the hero flow is currently on the earlier, safer version after a more ambitious rewrite was tested and then reverted
-- the surface now tells the broader ReMorph story beyond single healing events: benchmark lift, synthetic runtime mesh, workflow replay, and training readiness
-- the synthetic backend contract is richer and better aligned with Sprint 2 + Sprint 4 artifacts
-- the hero has since been refined carefully with better fit, calmer signal pulses, and more enterprise-styled request/output cards
-- text overflow handling is stronger across multiple cards and metadata surfaces
-- live mode feels smoother because dashboard commits are softened instead of visibly snapping every poll
 
 The project is not considered fully visually finished yet.
 The main remaining work is layout polish, spacing harmony, and UI refinement.
@@ -233,7 +182,6 @@ The main remaining work is layout polish, spacing harmony, and UI refinement.
 ## 10. Known Remaining Improvement Areas
 
 These are still good targets for future work:
-
 - refine hero rhythm relative to lower cards
 - standardize spacing/padding between sections
 - improve typography consistency
@@ -242,9 +190,6 @@ These are still good targets for future work:
 - make sure each screen size feels intentionally designed, not just stretched
 - improve the current hero flow in smaller controlled steps instead of full rewrites
 - improve request/output readability in the hero without breaking the working composition
-- continue auditing text overflow edge cases against even longer live backend strings
-- reduce bundle size or code-split heavy visual dependencies if performance tuning becomes a priority
-- wire the new workflow/benchmark/training panels to live backend endpoints once the backend contract is exposed over HTTP
 
 ## 10A. Recent Decisions
 
@@ -255,10 +200,6 @@ These are important recent decisions that future sessions should know:
 3. The hero flow was intentionally reverted to the previous version.
 4. Future hero improvements should be incremental, not wholesale replacements, unless explicitly requested.
 5. The user prefers preserving the working overall composition and improving it carefully rather than replacing it aggressively.
-6. Large animated request/healed text moving through the hero was tried and then removed because it hurt alignment and clarity.
-7. A subtler connector pulse treatment was preferred as the replacement.
-8. Smooth live-update behavior matters; avoid UI patterns that visibly flicker when telemetry refreshes frequently.
-9. Overflow handling is part of the product quality bar and should be treated as a first-class requirement, not a cosmetic afterthought.
 
 ## 11. Guardrails For Future LLM Sessions
 
@@ -288,7 +229,6 @@ If the UI starts drifting:
 ## 13. How To Update This File
 
 When the user says `update that document`, update this file with:
-
 - what changed
 - what decisions were made
 - what problems were found
@@ -299,12 +239,8 @@ Do not leave this file stale if the UI direction changes in a meaningful way.
 ## 14. Verification Notes
 
 Latest confirmed local verification:
-
 - `npx tsc -b` passed
 - after the hero-flow revert, `npx tsc -b` still passed
-- after the Sprint 4 dashboard expansion, `npx tsc -b` passed
-- `npm run lint` passed
-- `npm run build` passed when rerun outside the sandbox to avoid the known Windows/Vite `spawn EPERM` issue
 
 There was also a prior Vite/Windows sandbox issue where normal build verification sometimes required unrestricted execution because of `spawn EPERM` during config loading. That was an environment/sandbox issue, not a TypeScript app error.
 

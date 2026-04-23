@@ -1,6 +1,12 @@
 import { type DashboardSnapshot, type EngineState, type ReMorphEvent } from '../types/remorph';
 import { getTelemetryConfig, getTelemetrySnapshot } from '../services/telemetry';
 import syntheticData from '../data/synthetic_data.json';
+import {
+  mockBenchmarkSummary,
+  mockRuntimeServices,
+  mockTrainingReadiness,
+  mockWorkflowEpisodes,
+} from '../mock/database';
 import { buildFlowFromEvent, buildMetrics, normalizeEventList } from '../services/telemetry/normalizers';
 
 export type { EngineState, ReMorphEvent };
@@ -14,8 +20,12 @@ export function loadLocalTelemetry(limit: number): TelemetrySnapshot {
   
   return {
     events,
+    workflows: mockWorkflowEpisodes,
     flow: buildFlowFromEvent(leadEvent),
     metrics: buildMetrics(events),
+    benchmark: mockBenchmarkSummary,
+    training: mockTrainingReadiness,
+    services: mockRuntimeServices,
     session: {
       operator_name: 'Operator',
       role: 'Engineering',

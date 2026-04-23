@@ -16,13 +16,18 @@ import {
 import { HeroFlow } from "./components/dashboard/HeroFlow";
 import { MetricCard } from "./components/dashboard/MetricCard";
 import { Panel } from "./components/layout/Panel";
-import { EventFeed, countEventsByType } from "./components/dashboard/EventFeed";
+import { EventFeed } from "./components/dashboard/EventFeed";
 import { TracePanel } from "./components/dashboard/TracePanel";
 import { DiffViewer } from "./components/dashboard/DiffViewer";
 import { StatusPill } from "./components/dashboard/StatusPill";
 import { SignalRow } from "./components/dashboard/SignalRow";
+import { PipelineMap } from "./components/dashboard/PipelineMap";
+import { WorkflowTimeline } from "./components/dashboard/WorkflowTimeline";
+import { BenchmarkPanel } from "./components/dashboard/BenchmarkPanel";
+import { ServiceHealthPanel } from "./components/dashboard/ServiceHealthPanel";
+import { TrainingPanel } from "./components/dashboard/TrainingPanel";
 import { useDashboardRuntime } from "./hooks/useDashboardRuntime";
-import { engineTone, formatClock, labelForType } from "./lib/dashboard";
+import { countEventsByType, engineTone, formatClock, labelForType } from "./lib/dashboard";
 import { buildFlowFromEvent } from "./services/telemetry/normalizers";
 import type { EventType, ReMorphEvent } from "./types/remorph";
 
@@ -74,6 +79,21 @@ export default function App() {
     () => buildFlowFromEvent(activeEvent ?? null) ?? snapshot?.flow ?? null,
     [activeEvent, snapshot?.flow],
   );
+  const workflows = snapshot?.workflows ?? [];
+  const activeWorkflow = !workflows.length
+    ? null
+    : !activeEvent
+      ? workflows[0] ?? null
+      : (
+        workflows.find(
+          (workflow) =>
+            workflow.scenario_type === activeEvent.type &&
+            workflow.agent_type === "adaptive",
+        ) ??
+        workflows.find((workflow) => workflow.scenario_type === activeEvent.type) ??
+        workflows[0] ??
+        null
+      );
   const stats = snapshot?.metrics;
 
   return (
@@ -238,7 +258,9 @@ export default function App() {
                 activeLoad={Math.min(1, filteredEvents.length / 16)}
               />
 
-              <section className="grid min-h-0 gap-5 2xl:grid-cols-[minmax(0,1.22fr)_minmax(420px,0.78fr)]">
+              <PipelineMap flow={activeFlow} workflow={activeWorkflow} />
+
+              <section className="grid min-h-0 gap-5 2xl:grid-cols-[minmax(0,1.18fr)_minmax(420px,0.82fr)]">
                 <div className="grid min-h-0 gap-4">
                   <div className="grid gap-4 sm:grid-cols-2 2xl:grid-cols-4">
                     <MetricCard
@@ -282,9 +304,20 @@ export default function App() {
                 </div>
 
                 <div className="grid min-h-0 gap-4">
-                  <DiffViewer event={activeEvent ?? null} />
+                  <BenchmarkPanel benchmark={snapshot?.benchmark ?? null} />
+                  <TrainingPanel training={snapshot?.training ?? null} />
+                </div>
+              </section>
 
+              <section className="grid min-h-0 gap-5 2xl:grid-cols-[minmax(0,1.08fr)_minmax(420px,0.92fr)]">
+                <div className="grid min-h-0 gap-4">
+                  <DiffViewer event={activeEvent ?? null} />
                   <TracePanel event={activeEvent ?? null} />
+                </div>
+
+                <div className="grid min-h-0 gap-4">
+                  <WorkflowTimeline workflows={workflows} />
+                  <ServiceHealthPanel services={snapshot?.services ?? []} />
 
                   <div className="grid min-h-0 gap-4 2xl:grid-cols-2">
                     <Panel
@@ -299,6 +332,14 @@ export default function App() {
                           <SignalRow
                             label="Docs Source"
                             value={activeEvent.diagnostics.docs_source}
+                          />
+                          <SignalRow
+                            label="Spec Version"
+                            value={activeEvent.diagnostics.spec_version ?? "v-current"}
+                          />
+                          <SignalRow
+                            label="Selected Route"
+                            value={activeWorkflow?.selected_endpoint_path ?? "Awaiting match"}
                           />
                           <SignalRow
                             label="Source Component"
@@ -357,8 +398,8 @@ export default function App() {
                     </Panel>
 
                     <Panel
-                      eyebrow="Training Node"
-                      title="Operator Summary"
+                      eyebrow="Operator Summary"
+                      title="Control Plane Posture"
                       sticky
                       action={
                         <BrainCircuit className="h-4 w-4 text-accent-ai" />
@@ -395,14 +436,19 @@ export default function App() {
                           tone="live"
                         />
                         <InsightBadge
+                          label="Workflow Mode"
+                          value={activeWorkflow?.agent_type ?? "adaptive"}
+                          tone={activeWorkflow?.agent_type === "adaptive" ? "ai" : "muted"}
+                        />
+                        <InsightBadge
                           label="Event Status"
                           value={activeEvent?.status ?? "idle"}
                           tone={activeEvent ? eventTone(activeEvent) : "muted"}
                         />
                         <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-3 text-sm text-text-muted">
-                          The dashboard can stay on mock mode until
-                          Vedant&apos;s telemetry endpoint is live, then switch
-                          by env config without UI rewrites.
+                          The dashboard now mirrors the full ReMorph narrative:
+                          trapped failure, repair reasoning, retry recovery,
+                          benchmark lift, and training readiness in one surface.
                         </div>
                       </div>
                     </Panel>
@@ -440,11 +486,13 @@ function InsightBadge({
   tone: "success" | "live" | "ai" | "error" | "muted";
 }) {
   return (
-    <div className="flex items-center justify-between rounded-2xl border border-white/8 bg-white/[0.03] px-3 py-3">
-      <span className="text-[11px] uppercase tracking-[0.28em] text-text-muted">
+    <div className="flex items-start justify-between gap-3 rounded-2xl border border-white/8 bg-white/[0.03] px-3 py-3">
+      <span className="min-w-0 flex-1 text-[11px] uppercase tracking-[0.28em] text-text-muted">
         {label}
       </span>
-      <StatusPill tone={tone} label={value} />
+      <div className="min-w-0 max-w-[60%]">
+        <StatusPill tone={tone} label={value} />
+      </div>
     </div>
   );
 }

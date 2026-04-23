@@ -111,6 +111,14 @@
       0 0 36px rgba(179, 140, 255, 0.12);
   }
 
+  .hero-side-card {
+    box-shadow:
+      inset 1px 1px 0 rgba(255, 255, 255, 0.04),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+      0 20px 42px rgba(0, 0, 0, 0.26);
+    backdrop-filter: blur(18px);
+  }
+
   .cinematic-bg {
     position: fixed;
     inset: 0;
@@ -155,17 +163,53 @@
     align-items: start;
   }
 
-  .flow-packet {
-    @apply absolute rounded-full border px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.28em] backdrop-blur;
-    box-shadow: 0 0 26px rgba(255, 255, 255, 0.06);
+  .signal-rail {
+    position: relative;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.03) 10%,
+      rgba(73, 215, 255, 0.14) 35%,
+      rgba(179, 140, 255, 0.18) 50%,
+      rgba(57, 217, 138, 0.14) 65%,
+      rgba(255, 255, 255, 0.03) 90%,
+      transparent 100%
+    );
   }
 
-  .flow-packet.request {
-    @apply border-accent-error/20 bg-accent-error/12 text-accent-error;
+  .signal-pulse {
+    position: absolute;
+    top: 50%;
+    display: block;
+    height: 8px;
+    width: 8px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.88) 0%, rgba(73, 215, 255, 0.58) 35%, rgba(73, 215, 255, 0) 75%);
+    box-shadow: 0 0 14px rgba(73, 215, 255, 0.16);
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+    animation: signalPulse 6.4s ease-in-out infinite;
   }
 
-  .flow-packet.healed {
-    @apply border-accent-success/20 bg-accent-success/12 text-accent-success;
+  .signal-pulse-left {
+    left: 22%;
+    animation-delay: 0s;
+  }
+
+  .signal-pulse-mid {
+    left: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.88) 0%, rgba(179, 140, 255, 0.56) 35%, rgba(179, 140, 255, 0) 75%);
+    box-shadow: 0 0 16px rgba(179, 140, 255, 0.16);
+    animation-delay: 1.6s;
+  }
+
+  .signal-pulse-right {
+    left: 78%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.88) 0%, rgba(57, 217, 138, 0.54) 35%, rgba(57, 217, 138, 0) 75%);
+    box-shadow: 0 0 14px rgba(57, 217, 138, 0.14);
+    animation-delay: 3.2s;
   }
 
   .scan-lines::before {
@@ -204,6 +248,28 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes signalPulse {
+  0% {
+    opacity: 0.12;
+    transform: translate(-50%, -50%) scale(0.72);
+  }
+
+  16% {
+    opacity: 0.54;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+
+  32% {
+    opacity: 0.18;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+
+  100% {
+    opacity: 0.12;
+    transform: translate(-50%, -50%) scale(0.72);
   }
 }
 

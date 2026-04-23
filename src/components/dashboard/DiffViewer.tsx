@@ -44,7 +44,7 @@ function DiffCard({
   content: unknown;
 }) {
   return (
-    <section className={`rounded-[24px] border p-4 ${tone === 'success' ? 'border-accent-success/20 bg-accent-success/10' : 'border-accent-error/20 bg-accent-error/10'}`}>
+    <section className={`min-w-0 rounded-[24px] border p-4 ${tone === 'success' ? 'border-accent-success/20 bg-accent-success/10' : 'border-accent-error/20 bg-accent-error/10'}`}>
       <div className="text-[11px] uppercase tracking-[0.32em] text-text-muted">{title}</div>
       <pre className="mt-3 max-h-[16rem] overflow-auto whitespace-pre-wrap break-all rounded-2xl bg-black/25 p-3 font-mono text-xs leading-6 text-white custom-scrollbar">
         {JSON.stringify(content ?? {}, null, 2)}

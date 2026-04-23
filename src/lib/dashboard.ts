@@ -9,6 +9,21 @@ export function shortUrl(url: string) {
   }
 }
 
+export function splitUrlForDisplay(url: string) {
+  try {
+    const parsed = new URL(url);
+    return {
+      host: parsed.hostname,
+      path: parsed.pathname || '/',
+    };
+  } catch {
+    return {
+      host: url,
+      path: '',
+    };
+  }
+}
+
 export function formatClock(value: string | null) {
   if (!value) return 'Awaiting sync';
   const date = new Date(value);
@@ -19,6 +34,16 @@ export function formatClock(value: string | null) {
       minute: '2-digit',
       second: '2-digit',
     }).format(date);
+}
+
+export function formatRatioAsPercent(value: number) {
+  const normalized = value <= 1 ? value * 100 : value;
+  return `${Math.round(normalized)}%`;
+}
+
+export function formatSignedNumber(value: number, digits = 2) {
+  const prefix = value > 0 ? '+' : '';
+  return `${prefix}${value.toFixed(digits)}`;
 }
 
 export function labelForType(type: EventType | 'all') {
@@ -77,4 +102,13 @@ export function eventTone(event: ReMorphEvent): 'success' | 'live' | 'ai' | 'err
   if (event.status === 'healed') return 'success';
   if (event.status === 'pending') return 'live';
   return 'error';
+}
+
+export function countEventsByType(
+  events: ReMorphEvent[],
+  type: EventType | 'all',
+) {
+  return type === 'all'
+    ? events.length
+    : events.filter((event) => event.type === type).length;
 }

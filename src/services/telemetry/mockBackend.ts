@@ -1,9 +1,13 @@
 import {
   getMockAuthHeaders,
+  mockBenchmarkSummary,
   getSeedEvents,
   mockBackendNotices,
   mockLatencyProfiles,
+  mockRuntimeServices,
   mockSessionVariants,
+  mockTrainingReadiness,
+  mockWorkflowEpisodes,
 } from '../../mock/database';
 import type {
   ConnectionStatus,
@@ -23,6 +27,10 @@ interface MockBackendEnvelope {
   backend_label: string;
   notices: string[];
   last_updated: string;
+  workflows: DashboardSnapshot['workflows'];
+  benchmark: DashboardSnapshot['benchmark'];
+  training: DashboardSnapshot['training'];
+  services: DashboardSnapshot['services'];
 }
 
 export class MockBackend {
@@ -42,6 +50,10 @@ export class MockBackend {
       events: envelope.events,
       flow: buildFlowFromEvent(leadEvent),
       metrics: buildMetrics(envelope.events),
+      workflows: envelope.workflows,
+      benchmark: envelope.benchmark,
+      training: envelope.training,
+      services: envelope.services,
       session: envelope.session,
       source: 'mock',
       connection: envelope.connection,
@@ -58,6 +70,8 @@ export class MockBackend {
     const authHeaders = getMockAuthHeaders();
     const lastUpdated = new Date().toISOString();
     const connection = this.resolveConnection(profile, leadEvent);
+    const workflows = this.resolveWorkflows();
+    const services = this.resolveServices(profile);
 
     return {
       events,
@@ -72,6 +86,15 @@ export class MockBackend {
         mockBackendNotices[this.cursor % mockBackendNotices.length],
       ],
       last_updated: lastUpdated,
+      workflows,
+      benchmark: mockBenchmarkSummary,
+      training: {
+        ...mockTrainingReadiness,
+        latest_run_label: profile.id === 'timeout-edge'
+          ? 'Dataset generation delayed by retry storm / synthetic replay'
+          : mockTrainingReadiness.latest_run_label,
+      },
+      services,
     };
   }
 
@@ -122,6 +145,37 @@ export class MockBackend {
       return 'degraded';
     }
     return profile.connection;
+  }
+
+  private resolveWorkflows(): DashboardSnapshot['workflows'] {
+    const rotation = this.cursor % mockWorkflowEpisodes.length;
+    return mockWorkflowEpisodes
+      .slice(rotation)
+      .concat(mockWorkflowEpisodes.slice(0, rotation));
+  }
+
+  private resolveServices(profile: MockNetworkProfile): DashboardSnapshot['services'] {
+    return mockRuntimeServices.map((service) => {
+      if (profile.id === 'timeout-edge' && service.id === 'openenv') {
+        return {
+          ...service,
+          status: 'critical',
+          detail: 'OpenEnv handshake exceeded latency budget during synthetic replay',
+          latency_ms: 740,
+        };
+      }
+
+      if (profile.id === 'retrying' && service.id === 'training-node') {
+        return {
+          ...service,
+          status: 'healthy',
+          detail: 'Train/eval manifests regenerated from latest adaptive episodes',
+          latency_ms: 164,
+        };
+      }
+
+      return service;
+    });
   }
 }
 

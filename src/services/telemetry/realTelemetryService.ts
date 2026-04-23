@@ -1,5 +1,13 @@
 import type { DashboardSnapshot, TelemetryRequestOptions, TelemetryService } from '../../types/remorph';
-import { buildFlowFromEvent, buildMetrics, normalizeEventList } from './normalizers';
+import {
+  buildFlowFromEvent,
+  buildMetrics,
+  normalizeBenchmarkSummary,
+  normalizeEventList,
+  normalizeRuntimeServices,
+  normalizeTrainingReadiness,
+  normalizeWorkflowEpisodes,
+} from './normalizers';
 
 const RETRY_DELAYS_MS = [0, 300, 900];
 
@@ -20,12 +28,20 @@ export class RealTelemetryService implements TelemetryService {
 
     const payload = await response.json();
     const events = normalizeEventList(payload).slice(0, options?.limit ?? 80);
+    const workflows = normalizeWorkflowEpisodes(payload);
+    const benchmark = normalizeBenchmarkSummary(payload);
+    const training = normalizeTrainingReadiness(payload);
+    const services = normalizeRuntimeServices(payload);
     const latencyMs = Math.round(performance.now() - startedAt);
 
     return {
       events,
+      workflows,
       flow: buildFlowFromEvent(events[0] ?? null),
       metrics: buildMetrics(events),
+      benchmark,
+      training,
+      services,
       session: {
         operator_name: 'Dashboard User',
         role: 'Observability',

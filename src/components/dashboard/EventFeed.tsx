@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import type { EventType, ReMorphEvent } from "../../types/remorph";
+import type { ReMorphEvent } from "../../types/remorph";
 import { formatClock, labelForType, shortUrl } from "../../lib/dashboard";
 import { Panel } from "../layout/Panel";
 
@@ -27,6 +27,11 @@ export function EventFeed({
       }
     >
       <AnimatePresence initial={false}>
+        {!events.length ? (
+          <div className="flex min-h-[14rem] items-center justify-center rounded-[24px] border border-dashed border-white/10 bg-white/[0.02] text-sm text-text-muted">
+            No recovery episodes match the current filter.
+          </div>
+        ) : null}
         {events.map((event, index) => (
           <motion.button
             key={`${event.id}-${event.timestamp}`}
@@ -121,13 +126,4 @@ function StatusDot({ status }: { status: ReMorphEvent["status"] }) {
         ? "bg-accent-pending"
         : "bg-accent-error";
   return <span className={`h-2.5 w-2.5 rounded-full ${className}`} />;
-}
-
-export function countEventsByType(
-  events: ReMorphEvent[],
-  type: EventType | "all",
-) {
-  return type === "all"
-    ? events.length
-    : events.filter((event) => event.type === type).length;
 }
