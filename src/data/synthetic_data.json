@@ -1,0 +1,5189 @@
+[
+  {
+    "id": "REQ-700471",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-22T18:33:56.397663+00:00",
+    "confidence": 0.987,
+    "processing_ms": 316,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "PATCH",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_92",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_92",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: CRMVault\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-506020",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-22T17:59:56.396933+00:00",
+    "confidence": 0.925,
+    "processing_ms": 443,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: FinancialCore\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-808214",
+    "type": "route_drift",
+    "status": "failed",
+    "timestamp": "2026-04-22T16:17:56.396902+00:00",
+    "confidence": 0.148,
+    "processing_ms": 714,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: OrderEngine\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-139452",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-22T16:08:56.398020+00:00",
+    "confidence": 0.872,
+    "processing_ms": 688,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: PaymentGateway\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-114877",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-22T15:45:56.396604+00:00",
+    "confidence": 0.989,
+    "processing_ms": 71,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_0",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_0",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AnalyticsHub\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-625615",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-22T14:27:56.397974+00:00",
+    "confidence": 0.902,
+    "processing_ms": 84,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "llm",
+    "healing_action": "route_rewrite",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AuthService\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-550129",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-22T12:50:56.396942+00:00",
+    "confidence": 0.852,
+    "processing_ms": 776,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AuthService\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-641646",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-22T12:25:56.398081+00:00",
+    "confidence": 0.947,
+    "processing_ms": 90,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_138",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_138",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: LogisticsOps\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-805971",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-22T10:22:56.398038+00:00",
+    "confidence": 0.861,
+    "processing_ms": 409,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: OrderEngine\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-953114",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-22T08:24:56.397680+00:00",
+    "confidence": 0.959,
+    "processing_ms": 400,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_94",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_94",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AuthService\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-611308",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-22T07:20:56.397878+00:00",
+    "confidence": 0.869,
+    "processing_ms": 675,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: PaymentGateway\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-582764",
+    "type": "auth_drift",
+    "status": "failed",
+    "timestamp": "2026-04-22T06:47:56.397897+00:00",
+    "confidence": 0.348,
+    "processing_ms": 133,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: PaymentGateway\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-821280",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-22T06:37:56.397402+00:00",
+    "confidence": 0.893,
+    "processing_ms": 784,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AnalyticsHub\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-109299",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-22T05:24:56.398319+00:00",
+    "confidence": 0.962,
+    "processing_ms": 133,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_165",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_165",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AuthService\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-455243",
+    "type": "auth_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-22T05:13:56.398195+00:00",
+    "confidence": 0.25,
+    "processing_ms": 383,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: PaymentGateway\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-575609",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-22T02:32:56.397957+00:00",
+    "confidence": 0.925,
+    "processing_ms": 716,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "llm",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_124",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_124",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: OrderEngine\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-769630",
+    "type": "payload_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-21T23:50:56.397825+00:00",
+    "confidence": 0.317,
+    "processing_ms": 524,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_110",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: FinancialCore\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-182301",
+    "type": "payload_drift",
+    "status": "failed",
+    "timestamp": "2026-04-21T23:38:56.397394+00:00",
+    "confidence": 0.239,
+    "processing_ms": 102,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_62",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-428797",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T23:18:56.398055+00:00",
+    "confidence": 0.98,
+    "processing_ms": 658,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AuthService\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-350897",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-21T23:08:56.397059+00:00",
+    "confidence": 0.942,
+    "processing_ms": 510,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: InventorySvc\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-303813",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T22:09:56.398047+00:00",
+    "confidence": 0.952,
+    "processing_ms": 301,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: CRMVault\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-757839",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T20:16:56.396980+00:00",
+    "confidence": 0.949,
+    "processing_ms": 500,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_23",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_23",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: FinancialCore\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-460707",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T17:40:56.397716+00:00",
+    "confidence": 0.942,
+    "processing_ms": 421,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_98",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_98",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: OrderEngine\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-272632",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T16:12:56.398222+00:00",
+    "confidence": 0.977,
+    "processing_ms": 380,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "llm",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: CRMVault\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-682315",
+    "type": "route_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-21T14:06:56.397600+00:00",
+    "confidence": 0.399,
+    "processing_ms": 93,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: OrderEngine\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-213695",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-21T13:53:56.397797+00:00",
+    "confidence": 0.885,
+    "processing_ms": 299,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: InventorySvc\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-804012",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-21T13:33:56.398576+00:00",
+    "confidence": 0.864,
+    "processing_ms": 517,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: PaymentGateway\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-879344",
+    "type": "route_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-21T13:15:56.398064+00:00",
+    "confidence": 0.287,
+    "processing_ms": 83,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AnalyticsHub\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-640191",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T13:05:56.398526+00:00",
+    "confidence": 0.872,
+    "processing_ms": 138,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "llm",
+    "healing_action": "route_rewrite",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AnalyticsHub\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-815149",
+    "type": "payload_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-21T12:55:56.397068+00:00",
+    "confidence": 0.166,
+    "processing_ms": 268,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_32",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-186576",
+    "type": "route_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-21T12:35:56.397247+00:00",
+    "confidence": 0.313,
+    "processing_ms": 790,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: FinancialCore\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-250176",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-21T12:07:56.397610+00:00",
+    "confidence": 0.975,
+    "processing_ms": 605,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: InventorySvc\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-561149",
+    "type": "route_drift",
+    "status": "failed",
+    "timestamp": "2026-04-21T11:17:56.398303+00:00",
+    "confidence": 0.302,
+    "processing_ms": 105,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: LogisticsOps\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-774639",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T11:06:56.397267+00:00",
+    "confidence": 0.877,
+    "processing_ms": 587,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "llm",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_51",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_51",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-378467",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T10:15:56.396912+00:00",
+    "confidence": 0.857,
+    "processing_ms": 321,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "PATCH",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: CRMVault\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-691098",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T09:20:56.397382+00:00",
+    "confidence": 0.966,
+    "processing_ms": 556,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/payments/stripe/process",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: PaymentGateway\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-657105",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T06:55:56.398090+00:00",
+    "confidence": 0.884,
+    "processing_ms": 768,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: InventorySvc\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-700968",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-21T06:47:56.397432+00:00",
+    "confidence": 0.896,
+    "processing_ms": 64,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_66",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_66",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-485504",
+    "type": "server_fault",
+    "status": "failed",
+    "timestamp": "2026-04-21T04:02:56.398534+00:00",
+    "confidence": 0.37,
+    "processing_ms": 688,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: OrderEngine\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-968326",
+    "type": "payload_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-21T01:48:56.398518+00:00",
+    "confidence": 0.233,
+    "processing_ms": 692,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_187",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-745677",
+    "type": "server_fault",
+    "status": "failed",
+    "timestamp": "2026-04-21T00:07:56.397468+00:00",
+    "confidence": 0.301,
+    "processing_ms": 385,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: OrderEngine\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-461473",
+    "type": "auth_drift",
+    "status": "failed",
+    "timestamp": "2026-04-20T23:52:56.397144+00:00",
+    "confidence": 0.226,
+    "processing_ms": 599,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: LogisticsOps\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-993026",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-20T22:43:56.397858+00:00",
+    "confidence": 0.972,
+    "processing_ms": 640,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AuthService\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-932510",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T19:47:56.397308+00:00",
+    "confidence": 0.99,
+    "processing_ms": 417,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AuthService\nAction: auth_injection\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-385191",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T19:07:56.397984+00:00",
+    "confidence": 0.986,
+    "processing_ms": 174,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "PATCH",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "llm",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_127",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_127",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: CRMVault\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-137538",
+    "type": "route_drift",
+    "status": "failed",
+    "timestamp": "2026-04-20T18:32:56.396650+00:00",
+    "confidence": 0.24,
+    "processing_ms": 764,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: CRMVault\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-360736",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T17:47:56.398337+00:00",
+    "confidence": 0.879,
+    "processing_ms": 766,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: OrderEngine\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-229678",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T16:50:56.398370+00:00",
+    "confidence": 0.971,
+    "processing_ms": 423,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_171",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_171",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: OrderEngine\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-729038",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T16:16:56.398125+00:00",
+    "confidence": 0.941,
+    "processing_ms": 762,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_143",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_143",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-452371",
+    "type": "payload_drift",
+    "status": "failed",
+    "timestamp": "2026-04-20T15:09:56.397724+00:00",
+    "confidence": 0.138,
+    "processing_ms": 278,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_99",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-197714",
+    "type": "route_drift",
+    "status": "failed",
+    "timestamp": "2026-04-20T14:48:56.398442+00:00",
+    "confidence": 0.255,
+    "processing_ms": 583,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AuthService\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-878424",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-20T14:46:56.397010+00:00",
+    "confidence": 0.852,
+    "processing_ms": 193,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: FinancialCore\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-384950",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-20T13:48:56.398614+00:00",
+    "confidence": 0.961,
+    "processing_ms": 255,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: PaymentGateway\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-355687",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T13:34:56.397869+00:00",
+    "confidence": 0.977,
+    "processing_ms": 325,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: PaymentGateway\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-430063",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T11:35:56.396815+00:00",
+    "confidence": 0.959,
+    "processing_ms": 494,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_9",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_9",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: OrderEngine\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-651750",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T11:20:56.397050+00:00",
+    "confidence": 0.912,
+    "processing_ms": 644,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: PaymentGateway\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-450849",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-20T10:38:56.397152+00:00",
+    "confidence": 0.924,
+    "processing_ms": 461,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "PATCH",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: CRMVault\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-227150",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-20T10:11:56.398258+00:00",
+    "confidence": 0.877,
+    "processing_ms": 170,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: LogisticsOps\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-680800",
+    "type": "route_drift",
+    "status": "failed",
+    "timestamp": "2026-04-20T09:13:56.397229+00:00",
+    "confidence": 0.337,
+    "processing_ms": 525,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: PaymentGateway\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-394077",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T07:40:56.397654+00:00",
+    "confidence": 0.865,
+    "processing_ms": 710,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "llm",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AuthService\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-696710",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T07:37:56.397459+00:00",
+    "confidence": 0.894,
+    "processing_ms": 800,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "llm",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_69",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_69",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: CRMVault\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-941652",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T07:32:56.397770+00:00",
+    "confidence": 0.97,
+    "processing_ms": 715,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_104",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_104",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-983927",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T07:32:56.396686+00:00",
+    "confidence": 0.919,
+    "processing_ms": 782,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_4",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_4",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-409592",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T07:12:56.397619+00:00",
+    "confidence": 0.887,
+    "processing_ms": 245,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "llm",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AnalyticsHub\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-455632",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T06:29:56.396696+00:00",
+    "confidence": 0.909,
+    "processing_ms": 311,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_5",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_5",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: PaymentGateway\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-905599",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T04:02:56.397906+00:00",
+    "confidence": 0.907,
+    "processing_ms": 87,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/orders/fulfillment/bulk",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: OrderEngine\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-359252",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T03:34:56.397258+00:00",
+    "confidence": 0.897,
+    "processing_ms": 371,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: FinancialCore\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-180393",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T03:14:56.398473+00:00",
+    "confidence": 0.934,
+    "processing_ms": 511,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_182",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_182",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AuthService\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-214209",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T02:44:56.398405+00:00",
+    "confidence": 0.931,
+    "processing_ms": 206,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/orders/fulfillment/bulk",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: OrderEngine\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-757348",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T02:18:56.398450+00:00",
+    "confidence": 0.89,
+    "processing_ms": 367,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "llm",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/logistics/last-mile/tracking",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: LogisticsOps\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-745943",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-20T00:44:56.397170+00:00",
+    "confidence": 0.867,
+    "processing_ms": 220,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: FinancialCore\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-149593",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-20T00:25:56.397357+00:00",
+    "confidence": 0.911,
+    "processing_ms": 487,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_60",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_60",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: LogisticsOps\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-327707",
+    "type": "payload_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-19T23:54:56.397020+00:00",
+    "confidence": 0.261,
+    "processing_ms": 299,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_27",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: OrderEngine\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-109201",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T23:38:56.398295+00:00",
+    "confidence": 0.972,
+    "processing_ms": 289,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "llm",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AuthService\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-233987",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T23:12:56.397592+00:00",
+    "confidence": 0.949,
+    "processing_ms": 271,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "llm",
+    "healing_action": "auth_injection",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AnalyticsHub\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-515206",
+    "type": "route_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-19T22:44:56.398267+00:00",
+    "confidence": 0.315,
+    "processing_ms": 274,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "POST",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: FinancialCore\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-348203",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T22:37:56.398543+00:00",
+    "confidence": 0.972,
+    "processing_ms": 571,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: FinancialCore\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-329712",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T22:30:56.397816+00:00",
+    "confidence": 0.891,
+    "processing_ms": 73,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_109",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_109",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AnalyticsHub\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-729787",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T22:14:56.398424+00:00",
+    "confidence": 0.917,
+    "processing_ms": 243,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_177",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_177",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: LogisticsOps\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-753918",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T22:11:56.396971+00:00",
+    "confidence": 0.985,
+    "processing_ms": 551,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: InventorySvc\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-121144",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T22:08:56.397198+00:00",
+    "confidence": 0.929,
+    "processing_ms": 63,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: CRMVault\nAction: route_rewrite\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-882516",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T18:45:56.397179+00:00",
+    "confidence": 0.885,
+    "processing_ms": 273,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/logistics/last-mile/tracking",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: LogisticsOps\nAction: route_rewrite\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-764696",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T18:12:56.397805+00:00",
+    "confidence": 0.853,
+    "processing_ms": 670,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "PATCH",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_108",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_108",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: CRMVault\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-523654",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T17:16:56.398500+00:00",
+    "confidence": 0.943,
+    "processing_ms": 538,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "POST",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: FinancialCore\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-746692",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T16:50:56.396923+00:00",
+    "confidence": 0.965,
+    "processing_ms": 644,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "llm",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_17",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_17",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: OrderEngine\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-364553",
+    "type": "server_fault",
+    "status": "failed",
+    "timestamp": "2026-04-19T15:49:56.396990+00:00",
+    "confidence": 0.194,
+    "processing_ms": 428,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AnalyticsHub\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-550964",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-19T15:37:56.398622+00:00",
+    "confidence": 0.917,
+    "processing_ms": 767,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: LogisticsOps\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-305226",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-19T15:10:56.397584+00:00",
+    "confidence": 0.925,
+    "processing_ms": 660,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: FinancialCore\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-722415",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-19T14:11:56.397628+00:00",
+    "confidence": 0.891,
+    "processing_ms": 317,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: PaymentGateway\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-725464",
+    "type": "server_fault",
+    "status": "unhandled",
+    "timestamp": "2026-04-19T14:08:56.398276+00:00",
+    "confidence": 0.182,
+    "processing_ms": 200,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: InventorySvc\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-325641",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T14:03:56.398490+00:00",
+    "confidence": 0.856,
+    "processing_ms": 422,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_184",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_184",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AnalyticsHub\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-257040",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-19T12:46:56.397299+00:00",
+    "confidence": 0.863,
+    "processing_ms": 465,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AuthService\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-918947",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T12:26:56.396892+00:00",
+    "confidence": 0.866,
+    "processing_ms": 276,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_14",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_14",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: FinancialCore\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-814562",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T10:53:56.397510+00:00",
+    "confidence": 0.914,
+    "processing_ms": 324,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "llm",
+    "healing_action": "route_rewrite",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/orders/fulfillment/bulk",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: OrderEngine\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-493622",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T09:51:56.398586+00:00",
+    "confidence": 0.942,
+    "processing_ms": 715,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/payments/stripe/process",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: PaymentGateway\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-908069",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T09:41:56.398414+00:00",
+    "confidence": 0.933,
+    "processing_ms": 761,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AuthService\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-335116",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T05:44:56.397188+00:00",
+    "confidence": 0.985,
+    "processing_ms": 72,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_44",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_44",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AnalyticsHub\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-969340",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T05:41:56.396846+00:00",
+    "confidence": 0.941,
+    "processing_ms": 712,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "llm",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_11",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_11",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: LogisticsOps\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-432400",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-19T05:37:56.397347+00:00",
+    "confidence": 0.896,
+    "processing_ms": 573,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: InventorySvc\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-657731",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T04:47:56.397672+00:00",
+    "confidence": 0.979,
+    "processing_ms": 486,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AuthService\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-333089",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T04:36:56.398203+00:00",
+    "confidence": 0.929,
+    "processing_ms": 687,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_152",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_152",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AuthService\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-642557",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-19T03:32:56.397787+00:00",
+    "confidence": 0.862,
+    "processing_ms": 134,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: LogisticsOps\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-392956",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-19T03:24:56.398362+00:00",
+    "confidence": 0.982,
+    "processing_ms": 97,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/orders/fulfillment/bulk",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: OrderEngine\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-785441",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T23:21:56.397636+00:00",
+    "confidence": 0.99,
+    "processing_ms": 139,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/logistics/last-mile/tracking",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: LogisticsOps\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-838645",
+    "type": "payload_drift",
+    "status": "failed",
+    "timestamp": "2026-04-18T22:29:56.398311+00:00",
+    "confidence": 0.183,
+    "processing_ms": 684,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_164",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: OrderEngine\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-792717",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T21:26:56.398596+00:00",
+    "confidence": 0.871,
+    "processing_ms": 779,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_196",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_196",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-781443",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T19:47:56.397849+00:00",
+    "confidence": 0.944,
+    "processing_ms": 480,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "llm",
+    "healing_action": "route_rewrite",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: FinancialCore\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-311575",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T18:16:56.397993+00:00",
+    "confidence": 0.907,
+    "processing_ms": 185,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AnalyticsHub\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-538845",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T17:47:56.398434+00:00",
+    "confidence": 0.961,
+    "processing_ms": 604,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: PaymentGateway\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-601785",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-18T17:23:56.398605+00:00",
+    "confidence": 0.984,
+    "processing_ms": 220,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AnalyticsHub\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-690407",
+    "type": "route_drift",
+    "status": "failed",
+    "timestamp": "2026-04-18T17:08:56.397076+00:00",
+    "confidence": 0.16,
+    "processing_ms": 47,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: InventorySvc\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-978658",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-18T14:51:56.398569+00:00",
+    "confidence": 0.911,
+    "processing_ms": 107,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AnalyticsHub\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-108390",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T14:47:56.397966+00:00",
+    "confidence": 0.926,
+    "processing_ms": 687,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: CRMVault\nAction: auth_injection\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-373862",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T14:09:56.398353+00:00",
+    "confidence": 0.934,
+    "processing_ms": 429,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "llm",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_169",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_169",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: PaymentGateway\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-679858",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T13:50:56.397422+00:00",
+    "confidence": 0.979,
+    "processing_ms": 518,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_65",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_65",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: CRMVault\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-281572",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T13:15:56.397098+00:00",
+    "confidence": 0.947,
+    "processing_ms": 663,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: OrderEngine\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-989332",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T13:13:56.397707+00:00",
+    "confidence": 0.851,
+    "processing_ms": 136,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_97",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_97",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: OrderEngine\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-514402",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T12:52:56.396882+00:00",
+    "confidence": 0.873,
+    "processing_ms": 771,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: InventorySvc\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-899058",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-18T10:52:56.397118+00:00",
+    "confidence": 0.933,
+    "processing_ms": 648,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AuthService\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-192827",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-18T10:34:56.397558+00:00",
+    "confidence": 0.954,
+    "processing_ms": 748,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: LogisticsOps\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-869341",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T10:12:56.396832+00:00",
+    "confidence": 0.869,
+    "processing_ms": 227,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "llm",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: InventorySvc\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-676437",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T08:01:56.398178+00:00",
+    "confidence": 0.93,
+    "processing_ms": 366,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AuthService\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-310511",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T06:49:56.397476+00:00",
+    "confidence": 0.867,
+    "processing_ms": 62,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AnalyticsHub\nAction: auth_injection\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-850419",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-18T04:53:56.398142+00:00",
+    "confidence": 0.905,
+    "processing_ms": 193,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: OrderEngine\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-528058",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T04:14:56.398458+00:00",
+    "confidence": 0.923,
+    "processing_ms": 531,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_181",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_181",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-295682",
+    "type": "server_fault",
+    "status": "unhandled",
+    "timestamp": "2026-04-18T04:09:56.397923+00:00",
+    "confidence": 0.235,
+    "processing_ms": 397,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: FinancialCore\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-166111",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T03:55:56.396742+00:00",
+    "confidence": 0.955,
+    "processing_ms": 142,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "llm",
+    "healing_action": "route_rewrite",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: CRMVault\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-562598",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T03:11:56.398379+00:00",
+    "confidence": 0.896,
+    "processing_ms": 65,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/orders/fulfillment/bulk",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: OrderEngine\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-550436",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T02:52:56.398212+00:00",
+    "confidence": 0.856,
+    "processing_ms": 776,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: PaymentGateway\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-528754",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-18T02:39:56.397238+00:00",
+    "confidence": 0.926,
+    "processing_ms": 170,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: CRMVault\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-423501",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T02:34:56.397412+00:00",
+    "confidence": 0.919,
+    "processing_ms": 374,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: LogisticsOps\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-274561",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-18T01:02:56.397030+00:00",
+    "confidence": 0.916,
+    "processing_ms": 113,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "llm",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_28",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_28",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: CRMVault\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-794250",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-17T23:28:56.396676+00:00",
+    "confidence": 0.853,
+    "processing_ms": 783,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "PATCH",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: CRMVault\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-305900",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T22:33:56.397574+00:00",
+    "confidence": 0.906,
+    "processing_ms": 787,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_82",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_82",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: OrderEngine\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-521237",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-17T20:12:56.397206+00:00",
+    "confidence": 0.895,
+    "processing_ms": 443,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: CRMVault\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-538593",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T19:24:56.397442+00:00",
+    "confidence": 0.881,
+    "processing_ms": 251,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_67",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_67",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: PaymentGateway\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-787617",
+    "type": "auth_drift",
+    "status": "failed",
+    "timestamp": "2026-04-17T17:32:56.398240+00:00",
+    "confidence": 0.214,
+    "processing_ms": 773,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AuthService\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-757380",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-17T16:14:56.398150+00:00",
+    "confidence": 0.893,
+    "processing_ms": 561,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: PaymentGateway\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-712908",
+    "type": "server_fault",
+    "status": "failed",
+    "timestamp": "2026-04-17T15:35:56.397550+00:00",
+    "confidence": 0.292,
+    "processing_ms": 606,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AuthService\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-117858",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T15:06:56.396952+00:00",
+    "confidence": 0.895,
+    "processing_ms": 112,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: OrderEngine\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-572667",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T14:47:56.397531+00:00",
+    "confidence": 0.923,
+    "processing_ms": 400,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_77",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_77",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: CRMVault\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-380084",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T13:32:56.396800+00:00",
+    "confidence": 0.954,
+    "processing_ms": 437,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "PATCH",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: CRMVault\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-376546",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-17T12:28:56.398249+00:00",
+    "confidence": 0.936,
+    "processing_ms": 537,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: CRMVault\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-581261",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T12:27:56.398161+00:00",
+    "confidence": 0.874,
+    "processing_ms": 627,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: FinancialCore\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-641839",
+    "type": "route_drift",
+    "status": "failed",
+    "timestamp": "2026-04-17T12:11:56.398170+00:00",
+    "confidence": 0.322,
+    "processing_ms": 492,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: OrderEngine\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-161557",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-17T10:22:56.398011+00:00",
+    "confidence": 0.923,
+    "processing_ms": 225,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AuthService\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-363486",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-17T09:22:56.397760+00:00",
+    "confidence": 0.949,
+    "processing_ms": 590,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: LogisticsOps\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-998529",
+    "type": "auth_drift",
+    "status": "failed",
+    "timestamp": "2026-04-17T08:45:56.397915+00:00",
+    "confidence": 0.241,
+    "processing_ms": 247,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AnalyticsHub\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-162688",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-17T08:11:56.397108+00:00",
+    "confidence": 0.91,
+    "processing_ms": 338,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: LogisticsOps\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-775125",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-17T07:02:56.398028+00:00",
+    "confidence": 0.87,
+    "processing_ms": 795,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "POST",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: FinancialCore\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-364069",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T06:55:56.397493+00:00",
+    "confidence": 0.987,
+    "processing_ms": 493,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_73",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_73",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: LogisticsOps\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-902210",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-17T06:48:56.398396+00:00",
+    "confidence": 0.879,
+    "processing_ms": 593,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "POST",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: FinancialCore\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-560122",
+    "type": "auth_drift",
+    "status": "failed",
+    "timestamp": "2026-04-17T06:02:56.397451+00:00",
+    "confidence": 0.27,
+    "processing_ms": 590,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AuthService\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-465984",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-17T05:47:56.397742+00:00",
+    "confidence": 0.897,
+    "processing_ms": 663,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: OrderEngine\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-345951",
+    "type": "auth_drift",
+    "status": "failed",
+    "timestamp": "2026-04-17T05:18:56.398345+00:00",
+    "confidence": 0.297,
+    "processing_ms": 469,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: PaymentGateway\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-480083",
+    "type": "auth_drift",
+    "status": "failed",
+    "timestamp": "2026-04-17T03:46:56.398388+00:00",
+    "confidence": 0.332,
+    "processing_ms": 352,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: CRMVault\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-682218",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T03:38:56.397337+00:00",
+    "confidence": 0.877,
+    "processing_ms": 210,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AuthService\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-325794",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T02:52:56.397039+00:00",
+    "confidence": 0.87,
+    "processing_ms": 96,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "llm",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AuthService\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-811738",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T02:47:56.398230+00:00",
+    "confidence": 0.985,
+    "processing_ms": 768,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "PATCH",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "llm",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_155",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_155",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: CRMVault\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-280466",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T02:33:56.397328+00:00",
+    "confidence": 0.903,
+    "processing_ms": 695,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "llm",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AuthService\nAction: route_rewrite\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-345858",
+    "type": "payload_drift",
+    "status": "failed",
+    "timestamp": "2026-04-17T00:55:56.396665+00:00",
+    "confidence": 0.392,
+    "processing_ms": 291,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_2",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: FinancialCore\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-703617",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T00:52:56.398286+00:00",
+    "confidence": 0.969,
+    "processing_ms": 173,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_161",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_161",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AuthService\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-620490",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-17T00:07:56.397289+00:00",
+    "confidence": 0.954,
+    "processing_ms": 309,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: InventorySvc\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-814408",
+    "type": "auth_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-16T23:35:56.397162+00:00",
+    "confidence": 0.142,
+    "processing_ms": 54,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: CRMVault\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-511528",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T22:31:56.398003+00:00",
+    "confidence": 0.87,
+    "processing_ms": 199,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_129",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_129",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AuthService\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-571406",
+    "type": "payload_drift",
+    "status": "failed",
+    "timestamp": "2026-04-16T21:38:56.398073+00:00",
+    "confidence": 0.299,
+    "processing_ms": 719,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_137",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: LogisticsOps\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-564057",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T20:21:56.397087+00:00",
+    "confidence": 0.9,
+    "processing_ms": 731,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_34",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_34",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: LogisticsOps\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-966356",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-16T20:15:56.398561+00:00",
+    "confidence": 0.95,
+    "processing_ms": 523,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "agentic_search",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: AnalyticsHub\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-530743",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T19:43:56.398133+00:00",
+    "confidence": 0.891,
+    "processing_ms": 158,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_144",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_144",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: PaymentGateway\nAction: body_mutation\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-805452",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-16T19:10:56.398552+00:00",
+    "confidence": 0.934,
+    "processing_ms": 517,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: LogisticsOps\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-338925",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T19:08:56.397645+00:00",
+    "confidence": 0.955,
+    "processing_ms": 394,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/logistics/last-mile/tracking",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: LogisticsOps\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-412302",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T18:58:56.397000+00:00",
+    "confidence": 0.895,
+    "processing_ms": 578,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AuthService\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-498908",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-16T18:32:56.397485+00:00",
+    "confidence": 0.895,
+    "processing_ms": 515,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "POST",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: OrderEngine\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-927933",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T18:20:56.396782+00:00",
+    "confidence": 0.852,
+    "processing_ms": 125,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AuthService\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-401556",
+    "type": "route_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-16T17:58:56.397779+00:00",
+    "confidence": 0.103,
+    "processing_ms": 245,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_url": null,
+    "reasoning": "<think>\nScenario: route_drift\nTarget: PaymentGateway\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-638778",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T16:38:56.397135+00:00",
+    "confidence": 0.919,
+    "processing_ms": 418,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "edge",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: InventorySvc\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-312629",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T12:55:56.397689+00:00",
+    "confidence": 0.858,
+    "processing_ms": 683,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "agentic_search",
+    "healing_action": "body_mutation",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_95",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_95",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: AuthService\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-520729",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-16T12:33:56.397734+00:00",
+    "confidence": 0.901,
+    "processing_ms": 606,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "PATCH",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: CRMVault\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-979600",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T12:25:56.398187+00:00",
+    "confidence": 0.853,
+    "processing_ms": 762,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "llm",
+    "healing_action": "auth_injection",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: PaymentGateway\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-758852",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T12:13:56.397518+00:00",
+    "confidence": 0.968,
+    "processing_ms": 47,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "deterministic",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: FinancialCore\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-852455",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T11:49:56.397566+00:00",
+    "confidence": 0.941,
+    "processing_ms": 400,
+    "target_url": "https://api.lumen.infra/v3/auth/oauth2/token",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "llm",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/authservice_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: AuthService\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-937338",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-16T11:28:56.397540+00:00",
+    "confidence": 0.872,
+    "processing_ms": 588,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "POST",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: FinancialCore\nAction: retry_backoff\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-718254",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-16T10:07:56.396962+00:00",
+    "confidence": 0.92,
+    "processing_ms": 363,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "deterministic",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: FinancialCore\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-739084",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-16T08:42:56.398099+00:00",
+    "confidence": 0.922,
+    "processing_ms": 441,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: OrderEngine\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-713867",
+    "type": "auth_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-16T08:21:56.398108+00:00",
+    "confidence": 0.33,
+    "processing_ms": 128,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: CRMVault\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-284051",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T08:02:56.398481+00:00",
+    "confidence": 0.891,
+    "processing_ms": 552,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "GET",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_183",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_183",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: InventorySvc\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-388507",
+    "type": "payload_drift",
+    "status": "unhandled",
+    "timestamp": "2026-04-16T05:29:56.398116+00:00",
+    "confidence": 0.192,
+    "processing_ms": 283,
+    "target_url": "https://api.lumen.infra/v1/orders/fulfillment/bulk",
+    "method": "DELETE",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/orderengine_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_142",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: OrderEngine\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-408333",
+    "type": "auth_drift",
+    "status": "failed",
+    "timestamp": "2026-04-16T05:24:56.397317+00:00",
+    "confidence": 0.204,
+    "processing_ms": 530,
+    "target_url": "https://api.lumen.infra/v2/inventory/global/warehouse-east",
+    "method": "PUT",
+    "error_code": 401,
+    "message": "Credential Expiry",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/inventorysvc_openapi.json"
+    },
+    "fixed_headers": null,
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: InventorySvc\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-904138",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-16T05:12:56.397841+00:00",
+    "confidence": 0.983,
+    "processing_ms": 314,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: FinancialCore\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-865841",
+    "type": "payload_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T04:49:56.398327+00:00",
+    "confidence": 0.97,
+    "processing_ms": 187,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 422,
+    "message": "Schema Drift Detected",
+    "strategy": "deterministic",
+    "healing_action": "body_mutation",
+    "source_component": "gateway",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_166",
+      "v": 1.0
+    },
+    "fixed_payload": {
+      "account_id": "u_166",
+      "v": 2.0
+    },
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: CRMVault\nAction: body_mutation\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-237918",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T03:30:56.397698+00:00",
+    "confidence": 0.936,
+    "processing_ms": 474,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/logistics/last-mile/tracking",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: LogisticsOps\nAction: route_rewrite\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-959499",
+    "type": "server_fault",
+    "status": "healed",
+    "timestamp": "2026-04-16T02:25:56.397931+00:00",
+    "confidence": 0.938,
+    "processing_ms": 739,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 503,
+    "message": "Upstream Outage",
+    "strategy": "llm",
+    "healing_action": "retry_backoff",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: LogisticsOps\nAction: retry_backoff\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-839901",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T01:30:56.397833+00:00",
+    "confidence": 0.87,
+    "processing_ms": 442,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "deterministic",
+    "healing_action": "route_rewrite",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AnalyticsHub\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-125965",
+    "type": "payload_drift",
+    "status": "failed",
+    "timestamp": "2026-04-16T01:04:56.397277+00:00",
+    "confidence": 0.128,
+    "processing_ms": 172,
+    "target_url": "https://api.lumen.infra/v2/crm/lead-capture/enterprise",
+    "method": "POST",
+    "error_code": 400,
+    "message": "Schema Drift Detected",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "gateway",
+    "retry_count": 1,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/crmvault_openapi.json"
+    },
+    "raw_payload": {
+      "user_ref": "u_52",
+      "v": 1.0
+    },
+    "fixed_payload": null,
+    "reasoning": "<think>\nScenario: payload_drift\nTarget: CRMVault\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-540196",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-16T00:36:56.398508+00:00",
+    "confidence": 0.887,
+    "processing_ms": 338,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "agentic_search",
+    "healing_action": "auth_injection",
+    "source_component": "gateway",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: FinancialCore\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-729072",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-15T23:18:56.397750+00:00",
+    "confidence": 0.854,
+    "processing_ms": 274,
+    "target_url": "https://api.lumen.infra/v1/logistics/last-mile/tracking",
+    "method": "GET",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "proxy",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/logisticsops_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/logistics/last-mile/tracking",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: LogisticsOps\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-326023",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-15T21:20:56.397949+00:00",
+    "confidence": 0.894,
+    "processing_ms": 584,
+    "target_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "method": "GET",
+    "error_code": 308,
+    "message": "Endpoint Migration",
+    "strategy": "llm",
+    "healing_action": "route_rewrite",
+    "source_component": "edge",
+    "retry_count": 2,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/analyticshub_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/analytics/user-behavior/v4",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: AnalyticsHub\nAction: route_rewrite\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-452088",
+    "type": "route_drift",
+    "status": "healed",
+    "timestamp": "2026-04-15T21:01:56.397501+00:00",
+    "confidence": 0.969,
+    "processing_ms": 536,
+    "target_url": "https://api.lumen.infra/v1/payments/stripe/process",
+    "method": "POST",
+    "error_code": 404,
+    "message": "Endpoint Migration",
+    "strategy": "agentic_search",
+    "healing_action": "route_rewrite",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": true,
+      "docs_source": "local:app/testsupport/paymentgateway_openapi.json"
+    },
+    "fixed_url": "https://api.lumen.infra/v2/payments/stripe/process",
+    "reasoning": "<think>\nScenario: route_drift\nTarget: PaymentGateway\nAction: route_rewrite\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-116680",
+    "type": "auth_drift",
+    "status": "healed",
+    "timestamp": "2026-04-15T20:52:56.396865+00:00",
+    "confidence": 0.987,
+    "processing_ms": 287,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 403,
+    "message": "Credential Expiry",
+    "strategy": "llm",
+    "healing_action": "auth_injection",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": true,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "fixed_headers": {
+      "Authorization": "Bearer remorph_live_key"
+    },
+    "reasoning": "<think>\nScenario: auth_drift\nTarget: FinancialCore\nAction: auth_injection\nLLM Result: Success\n</think>\n[RESULT] Healing Complete."
+  },
+  {
+    "id": "REQ-671573",
+    "type": "server_fault",
+    "status": "failed",
+    "timestamp": "2026-04-15T20:31:56.397941+00:00",
+    "confidence": 0.182,
+    "processing_ms": 280,
+    "target_url": "https://api.lumen.infra/v4/finance/ledger/reconcile",
+    "method": "PATCH",
+    "error_code": 500,
+    "message": "Upstream Outage",
+    "strategy": "none",
+    "healing_action": "none",
+    "source_component": "proxy",
+    "retry_count": 0,
+    "diagnostics": {
+      "llm_attempted": true,
+      "llm_succeeded": false,
+      "fallback_used": false,
+      "docs_source": "local:app/testsupport/financialcore_openapi.json"
+    },
+    "reasoning": "<think>\nScenario: server_fault\nTarget: FinancialCore\nAction: none\nLLM Result: Fallback\n</think>\n[RESULT] Healing Complete."
+  }
+]
