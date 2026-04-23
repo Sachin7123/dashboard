@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 export function Panel({
   eyebrow,
@@ -6,8 +6,8 @@ export function Panel({
   action,
   children,
   sticky = false,
-  className = '',
-  contentClassName = '',
+  className = "",
+  contentClassName = "",
 }: {
   eyebrow: string;
   title: string;
@@ -18,12 +18,18 @@ export function Panel({
   contentClassName?: string;
 }) {
   return (
-    <section className={`glass-panel min-h-0 flex flex-col overflow-hidden ${className}`}>
-      <header className={`border-b border-white/6 bg-obsidian-surface/70 px-4 py-4 backdrop-blur ${sticky ? 'sticky top-0 z-10' : ''}`}>
+    <section
+      className={`glass-panel min-h-0 flex flex-col overflow-hidden ${className}`}
+    >
+      <header
+        className={`border-b border-white/6 bg-[linear-gradient(180deg,rgba(18,20,26,0.92),rgba(18,20,26,0.72))] px-4 py-3.5 backdrop-blur ${sticky ? "sticky top-0 z-10" : ""}`}
+      >
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.35em] text-text-muted">{eyebrow}</p>
-            <h3 className="mt-1 text-base font-semibold">{title}</h3>
+            <p className="text-[11px] uppercase tracking-[0.35em] text-text-muted">
+              {eyebrow}
+            </p>
+            <h3 className="mt-1 text-[15px] font-semibold leading-5">{title}</h3>
           </div>
           {action}
         </div>

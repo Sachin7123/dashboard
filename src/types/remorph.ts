@@ -45,7 +45,7 @@ export interface StageStatus {
 export interface FlowPacket {
   id: string;
   label: string;
-  variant: 'request' | 'healed';
+  variant: 'request' | 'healed' | 'destination';
   detail: string;
 }
 
@@ -59,6 +59,7 @@ export interface NetworkProfile {
 export interface RuntimeFlow {
   request_packet: FlowPacket;
   healed_packet: FlowPacket;
+  destination_packet: FlowPacket;
   stages: StageStatus[];
   confidence_score: number;
   completion_badge: string;

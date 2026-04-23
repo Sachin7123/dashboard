@@ -4,25 +4,41 @@ import type { DashboardSnapshot, TelemetryRequestOptions, TelemetryService } fro
 
 type BackendMode = 'auto' | 'mock' | 'real';
 
-const BACKEND_MODE = ((import.meta.env.VITE_REMORPH_BACKEND_MODE as string | undefined) ?? 'auto') as BackendMode;
-const BACKEND_URL = (import.meta.env.VITE_REMORPH_BACKEND_URL as string | undefined)
-  ?? (import.meta.env.VITE_TELEMETRY_URL as string | undefined)
-  ?? 'http://localhost:8000/api/telemetry';
-const REFRESH_MS = Number(import.meta.env.VITE_REMORPH_REFRESH_MS ?? import.meta.env.VITE_TELEMETRY_POLL_MS ?? 4500);
-
 const mockService = new MockTelemetryService();
-const realService = new RealTelemetryService(BACKEND_URL);
+
+function normalizeMode(value?: string): BackendMode {
+  const normalized = String(value ?? 'auto').toLowerCase();
+  if (normalized === 'mock' || normalized === 'local') return 'mock';
+  if (normalized === 'real' || normalized === 'remote') return 'real';
+  return 'auto';
+}
+
+function getBackendUrl() {
+  return (import.meta.env.VITE_REMORPH_BACKEND_URL as string | undefined)
+    ?? (import.meta.env.VITE_TELEMETRY_URL as string | undefined)
+    ?? 'http://localhost:8000/api/telemetry';
+}
 
 export function getTelemetryConfig() {
+  const pollMs = Number(import.meta.env.VITE_REMORPH_REFRESH_MS ?? import.meta.env.VITE_TELEMETRY_POLL_MS ?? 4500);
+
   return {
-    mode: BACKEND_MODE,
-    url: BACKEND_URL,
-    pollMs: Number.isFinite(REFRESH_MS) ? REFRESH_MS : 4500,
+    mode: normalizeMode(
+      (import.meta.env.VITE_REMORPH_BACKEND_MODE as string | undefined)
+      ?? (import.meta.env.VITE_TELEMETRY_MODE as string | undefined),
+    ),
+    url: getBackendUrl(),
+    pollMs: Number.isFinite(pollMs) ? pollMs : 4500,
   };
+}
+
+function getRealService() {
+  return new RealTelemetryService(getBackendUrl());
 }
 
 export async function getTelemetrySnapshot(options?: TelemetryRequestOptions): Promise<DashboardSnapshot> {
   const config = getTelemetryConfig();
+  const realService = getRealService();
 
   if (config.mode === 'mock') {
     return mockService.getSnapshot(options);

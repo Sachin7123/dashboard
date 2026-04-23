@@ -73,6 +73,12 @@ export function buildFlowFromEvent(event: ReMorphEvent | null): RuntimeFlow | nu
       variant: 'healed',
       detail: event.fixed_url || event.target_url,
     },
+    destination_packet: {
+      id: `${event.id}-destination`,
+      label: event.status === 'healed' ? 'destination endpoint' : 'review queue',
+      variant: 'destination',
+      detail: event.fixed_url || event.target_url,
+    },
     stages,
     confidence_score: Math.round(event.confidence * 100),
     completion_badge: event.status === 'healed' ? 'Recovered' : event.status === 'pending' ? 'In Flight' : 'Needs Review',
