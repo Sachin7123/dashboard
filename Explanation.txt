@@ -1,0 +1,327 @@
+Here’s a clean way to explain it to Vedant.
+
+**One-Line Positioning**
+
+The dashboard is not a generic monitoring UI. It is a visual control plane for ReMorph’s real product story:
+
+`Failed API Request -> Drift Detection -> Repair Intelligence -> Self-Healing -> Retry/Recovery -> Success, with explainability, benchmark proof, and training readiness.`
+
+**How It Aligns With ReMorph**
+
+ReMorph itself has a few core layers:
+
+- Sprint 1: proxy/mock-server/fuzzer side that creates or traps realistic API failures
+- Sprint 2: repair brain that reasons over the failed request and produces a healed request
+- Sprint 4: full loop around that brain
+  This includes retry orchestration, workflow episodes, reward scoring, benchmark comparison, and training dataset generation
+
+The dashboard mirrors exactly that structure:
+
+- It shows the trapped failure event
+- It shows the drift type
+- It shows the repaired output
+- It shows the reasoning/trace
+- It shows recovery status and retries
+- It shows benchmark advantage
+- It shows training/policy readiness
+- It shows service/runtime health for the system around the repair brain
+
+So the dashboard is aligned because it represents the real ReMorph pipeline, not just raw logs.
+
+**Best Short Explanation To Say**
+
+You can say this:
+
+“ReMorph is a self-healing API system. This dashboard visualizes the real ReMorph loop, not just telemetry. It starts from a failed request, shows drift detection, shows how the repair engine reasons, shows the healed request, shows whether retry succeeded, and then also shows Sprint 4 outputs like benchmark lift, workflow replay, runtime service health, and training readiness. So it aligns with both the Sprint 2 repair brain and the Sprint 4 end-to-end orchestration story.”
+
+**Demo Example You Can Use**
+
+Use a route drift example.
+
+Say:
+
+“Suppose the client sends `GET /api/v1/transactions`, but the actual valid route has moved to `/api/v2/finance/ledger`.”
+
+Then map it in the dashboard:
+
+- Event Feed:
+  Shows a `route_drift` event with error code like `404`
+- Hero Section:
+  Shows broken request entering the system and healed output leaving it
+- Pipeline Strip:
+  Shows `Input -> Detection -> Intelligence -> Self-Healing -> Recovery -> Success`
+- Diff + Recovery:
+  Shows old route vs recovered route
+- Cognitive Trace:
+  Shows why the engine selected the new endpoint
+- Operational Metadata:
+  Shows docs source, retry count, LLM/fallback behavior, source component
+- Workflow Replay:
+  Shows baseline failed, adaptive succeeded
+- Benchmark Panel:
+  Shows adaptive ReMorph outperforming baseline
+- Training Panel:
+  Shows those episodes can become reward-labeled training data
+- Runtime Services:
+  Shows proxy adapter, repair brain, retry orchestrator, benchmark harness, training node, OpenEnv adapter
+
+That is a very strong demo story because it matches how ReMorph actually works.
+
+**How To Explain Each Dashboard Part**
+
+1. **Left Sidebar**
+This is the runtime control and session area.
+
+- `Backend Live / Degraded Link / Awaiting Sync`
+  Current connection state
+- `Telemetry Source`
+  Whether data is mock or real backend
+- `Last Sync`
+  Last refresh timestamp
+- `Refresh Loop`
+  Whether live polling is active
+- `Operator`
+  Current session/operator context
+- `Live Ingestion On/Off`
+  Lets you simulate live telemetry refresh behavior
+- `Telemetry Filters`
+  Filters by `payload_drift`, `route_drift`, `auth_drift`, `server_fault`
+- `Signals + Notices`
+  Short runtime notices about what the system is doing
+
+What to say:
+“This left rail is the operator cockpit. It tells you what backend you are observing, whether the stream is live, and lets you focus on particular drift classes.”
+
+2. **Hero Section**
+This is the visual summary of the current active event.
+
+- Left card:
+  Incoming broken request
+- Center orb:
+  ReMorph intelligence core
+- Right card:
+  Validated/healed output
+- Side metrics:
+  Completion, confidence, network profile
+
+What to say:
+“This is the active healing story for one event. Broken request goes in, ReMorph processes it, healed output comes out. The orb is the repair intelligence layer.”
+
+3. **Pipeline Strip**
+This explicitly maps to product vision.
+
+- Input Request
+- Detection
+- Intelligence
+- Self-Healing
+- Recovery
+- Success
+
+What to say:
+“This strip is the clearest product framing. It shows the exact ReMorph sequence from failure to successful recovery.”
+
+4. **Metric Cards**
+High-level runtime summary.
+
+- Success Rate
+- Avg Latency
+- Confidence
+- Unresolved
+
+What to say:
+“These are the top-level health KPIs for the current telemetry window.”
+
+5. **Event Feed**
+All intercepted recovery episodes.
+
+Each item shows:
+- HTTP method
+- drift type
+- target URL
+- message
+- timestamp
+- processing time
+- confidence
+
+What to say:
+“This is the live queue of intercepted failures and recoveries. Clicking an event drives the rest of the dashboard.”
+
+6. **Benchmark Panel**
+Shows Sprint 4 value.
+
+- Baseline vs Adaptive
+- success delta
+- retry delta
+- latency delta
+- reward delta
+- per-scenario adaptive accuracy
+
+What to say:
+“This is where the dashboard proves ReMorph is better than doing nothing or using a weaker baseline. It turns the product claim into measurable evidence.”
+
+7. **Training Panel**
+Shows policy-learning readiness.
+
+- sample count
+- train/eval rows
+- success rate
+- scenario coverage
+- latest dataset label
+
+What to say:
+“This connects runtime behavior to future learning. The same recovery episodes can be converted into structured training examples.”
+
+8. **Diff + Recovery Output**
+Shows before/after transformation.
+
+Examples:
+- broken payload -> healed payload
+- broken route -> recovered route
+- broken auth -> fixed headers
+
+What to say:
+“This is the most concrete proof of self-healing. You can literally see what changed.”
+
+9. **Cognitive Trace**
+Explainability surface.
+
+Shows:
+- event id
+- healing action
+- strategy
+- stage-by-stage reasoning text
+
+What to say:
+“This is the explainability layer. It answers why ReMorph chose this repair instead of just saying it succeeded.”
+
+10. **Workflow Replay**
+Sprint 4 episode view.
+
+Shows:
+- baseline vs adaptive episode
+- request
+- selected endpoint
+- retries
+- route match
+- reward components
+
+What to say:
+“This is not just one event view. It shows the actual adaptive workflow outcome and how reward was assigned.”
+
+11. **Runtime Services**
+Backend integration readiness.
+
+Shows health of:
+- Proxy Adapter
+- Sprint 2 Repair Brain
+- Retry Orchestrator
+- Sprint 4 Benchmark
+- Training Dataset Builder
+- OpenEnv Adapter
+
+What to say:
+“This panel maps the UI to real ReMorph system modules. It makes the architecture visible.”
+
+12. **Operational Metadata**
+Detailed backend-aligned details for current event.
+
+Shows:
+- docs source
+- spec version
+- selected route
+- source component
+- retry count
+- method
+- llm attempted/succeeded
+- fallback used
+- error code
+
+What to say:
+“This is the technical inspection panel. If Vedant wants contract-level alignment, this is the proof.”
+
+13. **Control Plane Posture**
+Operator summary.
+
+Shows:
+- engine state
+- session state
+- environment
+- selected drift
+- workflow mode
+- event status
+
+What to say:
+“This gives the current operating posture of the system from an operator perspective.”
+
+**Best End-to-End Demo Script**
+
+You can narrate like this:
+
+1. “This is ReMorph’s control plane. It visualizes how a failed API request gets healed.”
+2. “On the left, I can choose live or mock runtime and filter by drift type.”
+3. “Here in the event feed, I’ll pick a route drift.”
+4. “The hero shows the broken request entering the ReMorph intelligence core and the healed request coming out.”
+5. “The pipeline strip shows the exact product flow: input, detection, intelligence, healing, recovery, success.”
+6. “This diff panel shows the actual route rewrite.”
+7. “This reasoning panel shows why ReMorph selected that repair.”
+8. “This metadata panel shows backend-facing details like docs source, retry count, LLM/fallback status, and selected route.”
+9. “Now the important part: the workflow and benchmark panels show that adaptive ReMorph succeeds where baseline fails.”
+10. “Finally, the training panel shows these runtime episodes are not dead-end logs; they can become learning data for future policy improvement.”
+
+**Simple Concrete Example**
+
+Use this:
+
+Broken request:
+```text
+GET https://mock.example.com/api/v1/transactions
+```
+
+Detected problem:
+```text
+404 route_drift
+```
+
+Recovered request:
+```text
+GET https://mock.example.com/api/v2/finance/ledger
+```
+
+How to explain:
+- Proxy traps failure
+- ReMorph identifies route drift
+- Docs/spec suggest new endpoint
+- Repair brain proposes rewritten route
+- Retry succeeds
+- Benchmark panel proves adaptive wins
+- Training panel proves the episode can feed learning
+
+**If Vedant Asks “What Is Mock vs Real Here?”**
+
+Say:
+
+“The dashboard is already architected for both. In mock mode it simulates realistic ReMorph episodes using synthetic data shaped around the real Sprint 2 and Sprint 4 contracts. In real mode it can consume a backend telemetry endpoint without rewriting the UI. So the product story is already stable even before final backend wiring.”
+
+**If He Asks “Why Is This Faithful To ReMorph?”**
+
+Say:
+
+“Because each major panel corresponds to a real ReMorph concern:
+- Event Feed = trapped failures
+- Hero + Diff = healed request emission
+- Trace = explainable repair reasoning
+- Metadata = backend contract diagnostics
+- Workflow Replay = retry orchestration episodes
+- Benchmark = adaptive vs baseline evaluation
+- Training = dataset generation from episodes
+- Runtime Services = architecture visibility”
+
+**Very Short Version You Can Memorize**
+
+“ReMorph is a self-healing API system, and this dashboard is its control plane. It shows failed requests, detected drift, repair reasoning, healed output, retry success, benchmark lift over baseline, and training readiness. So it’s aligned not just with Sprint 2 healing, but with the full Sprint 4 end-to-end ReMorph story.”
+
+If you want, I can also turn this into:
+- a 60-second spoken pitch
+- a 2-minute judge demo script
+- a Vedant-specific technical explanation
+- speaker notes mapped panel-by-panel to the actual UI screen

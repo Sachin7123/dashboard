@@ -36,6 +36,7 @@
     min-height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -116,6 +117,91 @@
       inset 1px 1px 0 rgba(255, 255, 255, 0.04),
       inset 0 -1px 0 rgba(255, 255, 255, 0.02),
       0 20px 42px rgba(0, 0, 0, 0.26);
+    backdrop-filter: blur(18px);
+  }
+
+  .landing-nav {
+    box-shadow:
+      inset 1px 1px 0 rgba(255, 255, 255, 0.04),
+      0 20px 40px rgba(0, 0, 0, 0.24);
+  }
+
+  .landing-grid-pattern {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(circle at center, black 42%, transparent 88%);
+    opacity: 0.16;
+    pointer-events: none;
+  }
+
+  .landing-section {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 22px;
+  }
+
+  .landing-section:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .landing-section-icon {
+    display: flex;
+    height: 38px;
+    width: 38px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    border: 1px solid rgba(73, 215, 255, 0.16);
+    background: rgba(73, 215, 255, 0.08);
+    box-shadow: 0 0 18px rgba(73, 215, 255, 0.08);
+  }
+
+  .landing-cta-glow {
+    position: absolute;
+    inset: -12% -6% auto;
+    height: 140%;
+    background:
+      radial-gradient(circle at 22% 34%, rgba(73, 215, 255, 0.14), transparent 28%),
+      radial-gradient(circle at 72% 26%, rgba(179, 140, 255, 0.16), transparent 30%),
+      radial-gradient(circle at 58% 88%, rgba(57, 217, 138, 0.1), transparent 24%);
+    filter: blur(16px);
+    pointer-events: none;
+  }
+
+  .architecture-rail {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(73, 215, 255, 0.22) 18%,
+      rgba(179, 140, 255, 0.32) 52%,
+      rgba(57, 217, 138, 0.22) 84%,
+      transparent 100%
+    );
+    transform: translateY(-50%);
+    opacity: 0.72;
+    pointer-events: none;
+  }
+
+  .architecture-core-panel {
+    box-shadow:
+      inset 1px 1px 0 rgba(255, 255, 255, 0.04),
+      0 18px 48px rgba(0, 0, 0, 0.28),
+      0 0 42px rgba(179, 140, 255, 0.06);
     backdrop-filter: blur(18px);
   }
 

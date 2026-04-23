@@ -26,6 +26,7 @@ import { WorkflowTimeline } from "./components/dashboard/WorkflowTimeline";
 import { BenchmarkPanel } from "./components/dashboard/BenchmarkPanel";
 import { ServiceHealthPanel } from "./components/dashboard/ServiceHealthPanel";
 import { TrainingPanel } from "./components/dashboard/TrainingPanel";
+import { OrganizationLanding } from "./components/dashboard/OrganizationLanding";
 import { useDashboardRuntime } from "./hooks/useDashboardRuntime";
 import { countEventsByType, engineTone, formatClock, labelForType } from "./lib/dashboard";
 import { buildFlowFromEvent } from "./services/telemetry/normalizers";
@@ -58,6 +59,7 @@ export default function App() {
     setIsLiveMode,
   } = useDashboardRuntime();
   const [activeFilter, setActiveFilter] = useState<EventFilter>("all");
+  const [activePage, setActivePage] = useState<"landing" | "dashboard">("landing");
 
   const deferredEvents = useDeferredValue(snapshot?.events ?? []);
 
@@ -95,6 +97,17 @@ export default function App() {
         null
       );
   const stats = snapshot?.metrics;
+
+  if (activePage === "landing") {
+    return (
+      <OrganizationLanding
+        snapshot={snapshot}
+        event={activeEvent ?? null}
+        workflow={activeWorkflow}
+        onEnterDashboard={() => setActivePage("dashboard")}
+      />
+    );
+  }
 
   return (
     <div className="min-h-dvh w-screen overflow-x-hidden overflow-y-auto bg-obsidian-bg text-text-primary">
@@ -174,6 +187,13 @@ export default function App() {
                     <WifiOff className="h-4 w-4" />
                   )}
                   {isLiveMode ? "Live Ingestion On" : "Live Ingestion Off"}
+                </button>
+
+                <button
+                  onClick={() => setActivePage("landing")}
+                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-text-muted transition-all hover:border-white/12 hover:text-white"
+                >
+                  Back To Overview
                 </button>
 
                 {errorMessage ? (
