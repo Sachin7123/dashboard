@@ -1,7 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useMemo, useState } from "react";
 import type { ReMorphEvent } from "../../types/remorph";
 import { formatClock, labelForType, shortUrl } from "../../lib/dashboard";
 import { Panel } from "../layout/Panel";
+import { Pagination } from "../app/Pagination";
 
 export function EventFeed({
   events,
@@ -14,25 +16,71 @@ export function EventFeed({
   onSelect: (id: string) => void;
   title: string;
 }) {
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<"latest" | "confidence">("latest");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
+
+  const filteredEvents = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    const next = events.filter((event) =>
+      !normalized
+        ? true
+        : `${event.target_url} ${event.message} ${event.method}`.toLowerCase().includes(normalized),
+    );
+
+    return next.sort((a, b) =>
+      sort === "confidence"
+        ? b.confidence - a.confidence
+        : new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+    );
+  }, [events, query, sort]);
+
+  const pageCount = Math.max(1, Math.ceil(filteredEvents.length / pageSize));
+  const pagedEvents = filteredEvents.slice((page - 1) * pageSize, page * pageSize);
+
   return (
     <Panel
       eyebrow="Active Event Feed"
       title={title}
       sticky
-      contentClassName="min-h-0 overflow-y-auto custom-scrollbar px-3 py-3 xl:max-h-[36rem]"
+      contentClassName="min-h-0 overflow-y-auto custom-scrollbar px-3 py-3 xl:max-h-[42rem]"
       action={
         <div className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 text-xs font-mono text-text-muted">
-          {events.length} visible
+          {filteredEvents.length} visible
         </div>
       }
     >
+      <div className="mb-3 flex flex-wrap items-center gap-3">
+        <input
+          value={query}
+          onChange={(event) => {
+            setPage(1);
+            setQuery(event.target.value);
+          }}
+          placeholder="Search events"
+          className="min-w-[180px] flex-1 rounded-2xl border border-white/8 bg-black/20 px-4 py-3 text-sm text-white outline-none"
+        />
+        <select
+          value={sort}
+          onChange={(event) => {
+            setPage(1);
+            setSort(event.target.value as "latest" | "confidence");
+          }}
+          className="rounded-2xl border border-white/8 bg-black/20 px-4 py-3 text-sm text-white outline-none"
+        >
+          <option value="latest">Latest</option>
+          <option value="confidence">Confidence</option>
+        </select>
+      </div>
+
       <AnimatePresence initial={false}>
-        {!events.length ? (
+        {!filteredEvents.length ? (
           <div className="flex min-h-[14rem] items-center justify-center rounded-[24px] border border-dashed border-white/10 bg-white/[0.02] text-sm text-text-muted">
             No recovery episodes match the current filter.
           </div>
         ) : null}
-        {events.map((event, index) => (
+        {pagedEvents.map((event, index) => (
           <motion.button
             key={`${event.id}-${event.timestamp}`}
             layout
@@ -78,6 +126,20 @@ export function EventFeed({
           </motion.button>
         ))}
       </AnimatePresence>
+
+      <div className="mt-4">
+        <Pagination
+          page={page}
+          pageCount={pageCount}
+          pageSize={pageSize}
+          pageSizeOptions={[5, 10, 20]}
+          onPageChange={setPage}
+          onPageSizeChange={(nextSize) => {
+            setPage(1);
+            setPageSize(nextSize);
+          }}
+        />
+      </div>
     </Panel>
   );
 }

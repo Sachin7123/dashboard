@@ -71,7 +71,7 @@ function getHeroMetrics(
   return [
     {
       label: "Requests healed",
-      value: metrics?.healed_events ?? 1842,
+      value: metrics?.healed_events ?? 24,
       suffix: "+",
     },
     {
@@ -81,12 +81,12 @@ function getHeroMetrics(
     },
     {
       label: "Success rate",
-      value: metrics?.success_rate ?? 98,
+      value: metrics?.success_rate ?? 96,
       suffix: "%",
     },
     {
-      label: "Active monitors",
-      value: (snapshot?.services.length ?? 7) + 12,
+      label: "Runtime services",
+      value: snapshot?.services.length ?? 7,
       suffix: "",
     },
   ];
@@ -97,11 +97,13 @@ export function OrganizationLanding({
   event,
   workflow,
   onEnterDashboard,
+  hideHeader = false,
 }: {
   snapshot: DashboardSnapshot | null;
   event: ReMorphEvent | null;
   workflow: WorkflowEpisode | null;
   onEnterDashboard: () => void;
+  hideHeader?: boolean;
 }) {
   const heroMetrics = getHeroMetrics(snapshot, workflow);
   const recoveryConfidence = Math.round((event?.confidence ?? 0.94) * 100);
@@ -112,61 +114,60 @@ export function OrganizationLanding({
       <div className="landing-grid-pattern" />
 
       <div className="relative w-full px-4 pb-10 pt-4 sm:px-5 lg:px-7 lg:pb-14 lg:pt-5 2xl:px-10">
-        <motion.header
-          initial={{ opacity: 0, y: -18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-          className="landing-nav sticky top-3 z-40 flex items-center justify-between gap-4 rounded-[24px] border border-white/8 bg-black/25 px-4 py-3 backdrop-blur-2xl sm:px-5"
-        >
-          <button
-            onClick={() => scrollToSection("hero")}
-            className="flex items-center gap-3 text-left"
+        {!hideHeader ? (
+          <motion.header
+            initial={{ opacity: 0, y: -18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            className="landing-nav sticky top-3 z-40 flex items-center justify-between gap-4 rounded-[24px] border border-white/8 bg-black/25 px-4 py-3 backdrop-blur-2xl sm:px-5"
           >
-            <div className="orb-badge h-10 w-10 rounded-xl">
-              <Orbit className="h-4 w-4 text-accent-ai" />
-            </div>
+            <button
+              onClick={() => scrollToSection("hero")}
+              className="flex items-center gap-3 text-left"
+            >
+              <div className="orb-badge h-10 w-10 rounded-xl">
+                <Orbit className="h-4 w-4 text-accent-ai" />
+              </div>
             <div>
-              <div className="text-[10px] uppercase tracking-[0.34em] text-text-muted">
+              <div className="text-sm font-semibold tracking-[0.14em] uppercase text-white">
                 ReMorph
               </div>
-              <div className="text-sm font-semibold tracking-[0.14em] uppercase text-white">
-                Self-Healing Platform
-              </div>
             </div>
-          </button>
+            </button>
 
-          <nav className="hidden items-center gap-6 text-sm text-text-muted lg:flex">
-            <button onClick={() => scrollToSection("features")} className="transition hover:text-white">
-              Features
-            </button>
-            <button onClick={() => scrollToSection("architecture")} className="transition hover:text-white">
-              Architecture
-            </button>
-            <button onClick={() => scrollToSection("metrics")} className="transition hover:text-white">
-              Metrics
-            </button>
-            <button onClick={() => scrollToSection("docs")} className="transition hover:text-white">
-              Docs
-            </button>
-          </nav>
+            <nav className="hidden items-center gap-6 text-sm text-text-muted lg:flex">
+              <button onClick={() => scrollToSection("features")} className="transition hover:text-white">
+                Features
+              </button>
+              <button onClick={() => scrollToSection("architecture")} className="transition hover:text-white">
+                Architecture
+              </button>
+              <button onClick={() => scrollToSection("metrics")} className="transition hover:text-white">
+                Metrics
+              </button>
+              <button onClick={() => scrollToSection("docs")} className="transition hover:text-white">
+                Docs
+              </button>
+            </nav>
 
-          <div className="flex items-center gap-3">
-            <StatusPill
-              tone={snapshot?.connection === "degraded" ? "live" : "success"}
-              label={snapshot?.connection === "degraded" ? "Adaptive Runtime" : "Control Plane Ready"}
-            />
-            <button
-              onClick={onEnterDashboard}
-              className="rounded-2xl border border-accent-live/28 bg-accent-live/12 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.28em] text-accent-live transition hover:border-accent-live/42 hover:bg-accent-live/18"
-            >
-              Dashboard
-            </button>
-          </div>
-        </motion.header>
+            <div className="flex items-center gap-3">
+              <StatusPill
+                tone={snapshot?.connection === "degraded" ? "live" : "success"}
+                label={snapshot?.connection === "degraded" ? "Adaptive Runtime" : "Control Plane Ready"}
+              />
+              <button
+                onClick={onEnterDashboard}
+                className="rounded-2xl border border-accent-live/28 bg-accent-live/12 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.28em] text-accent-live transition hover:border-accent-live/42 hover:bg-accent-live/18"
+              >
+                Dashboard
+              </button>
+            </div>
+          </motion.header>
+        ) : null}
 
         <section
           id="hero"
-          className="grid min-h-[calc(100dvh-6.5rem)] items-center gap-8 pb-10 pt-8 xl:grid-cols-[minmax(0,0.8fr)_minmax(760px,1.2fr)] xl:gap-10 2xl:grid-cols-[minmax(0,0.76fr)_minmax(860px,1.24fr)] lg:pb-14 lg:pt-12"
+          className={`grid min-h-[calc(100dvh-6.5rem)] items-center gap-8 pb-10 ${hideHeader ? "pt-20" : "pt-8"} xl:grid-cols-[minmax(0,0.8fr)_minmax(760px,1.2fr)] xl:gap-10 2xl:grid-cols-[minmax(0,0.76fr)_minmax(860px,1.24fr)] lg:pb-14 ${hideHeader ? "lg:pt-24" : "lg:pt-12"}`}
         >
           <motion.div
             initial={{ opacity: 0, x: -24 }}
@@ -176,7 +177,7 @@ export function OrganizationLanding({
           >
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] uppercase tracking-[0.3em] text-text-muted">
               <Sparkles className="h-3.5 w-3.5 text-accent-ai" />
-              Autonomous recovery for drifting APIs
+              ReMorph platform experience
             </div>
 
             <h1 className="mt-6 max-w-[10.5ch] text-5xl font-semibold leading-[0.95] text-white sm:text-6xl xl:text-[5.8rem] 2xl:text-[6.4rem]">
@@ -184,8 +185,8 @@ export function OrganizationLanding({
             </h1>
 
             <p className="mt-6 max-w-[42rem] text-base leading-8 text-text-muted sm:text-lg 2xl:max-w-[48rem]">
-              Detect API failures, repair broken requests, and recover healthy traffic
-              with a simple AI-native control surface.
+              ReMorph detects API failures, repairs broken requests, and gives teams a
+              clear control plane for recovery workflows.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">
@@ -249,7 +250,7 @@ export function OrganizationLanding({
                   {snapshot?.backend_label ?? "Adaptive mock lab"}
                 </div>
                 <div className="mt-2 text-sm leading-7 text-text-muted">
-                  Demo-ready and dashboard-linked.
+                  Connected to the ReMorph runtime model.
                 </div>
               </div>
               <div className="glass-panel px-4 py-4">
@@ -260,7 +261,7 @@ export function OrganizationLanding({
                   {recoveryConfidence}%
                 </div>
                 <div className="mt-2 text-sm leading-7 text-text-muted">
-                  Clear repair confidence.
+                  Confidence reported from repair telemetry.
                 </div>
               </div>
               <div className="glass-panel px-4 py-4">
@@ -271,7 +272,7 @@ export function OrganizationLanding({
                   {event?.type?.replace("_", " ") ?? "route drift"}
                 </div>
                 <div className="mt-2 text-sm leading-7 text-text-muted">
-                  Built for live API change.
+                  Focused on drift, auth, and route recovery.
                 </div>
               </div>
             </div>
